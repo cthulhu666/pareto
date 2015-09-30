@@ -8,7 +8,7 @@ module Pareto
       super
     end
 
-    def truncate(size, comparator = NONDOMINATED_SORTING_COMPARATOR)
+    def truncate(size, comparator = NondominatedSortingComparator)
       update if modified?
       super(size, comparator)
     end

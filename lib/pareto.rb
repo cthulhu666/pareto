@@ -4,23 +4,26 @@ require "pareto/population"
 require "pareto/fast_nondominated_sorting"
 require "pareto/nondominated_population"
 require "pareto/nondominated_sorting_population"
+require "pareto/tournament_selection"
 
+require "pareto/algorithm"
+require "pareto/evolutionary_algorithm"
 require "pareto/algorithms/nsgaii"
 
 module Pareto
 
   EPS = 1e-10 # TODO check this thingy
 
-  RANK_COMPARATOR = -> (s1, s2) { s1.rank <=> s2.rank }
+  RankComparator = -> (s1, s2) { s1.rank <=> s2.rank }
 
-  CROWDING_COMPARATOR = -> (s1, s2) { s2.crowding_distance <=> s1.crowding_distance }
+  CrowdingComparator = -> (s1, s2) { s2.crowding_distance <=> s1.crowding_distance }
 
-  NONDOMINATED_SORTING_COMPARATOR = Proc.new do |s1, s2|
-    a = RANK_COMPARATOR.(s1, s2)
+  NondominatedSortingComparator = Proc.new do |s1, s2|
+    a = RankComparator.(s1, s2)
     unless a == 0
       a
     else
-      CROWDING_COMPARATOR.(s1, s2)
+      CrowdingComparator.(s1, s2)
     end
   end
 
@@ -61,7 +64,7 @@ module Pareto
 
   end
 
-  PARETO_DOMINANCE_COMPARATOR = Proc.new do |s1, s2|
+  ParetoDominanceComparator = Proc.new do |s1, s2|
     a = AggregateConstraintComparator.(s1, s2)
     unless a == 0
       a

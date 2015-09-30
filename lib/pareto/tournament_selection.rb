@@ -3,7 +3,7 @@ module Pareto
 
     attr_reader :size, :comparator
 
-    def initialize(size: 2, comparator: PARETO_DOMINANCE_COMPARATOR)
+    def initialize(size: 2, comparator: ParetoDominanceComparator)
       @size = size
       @comparator = comparator
     end

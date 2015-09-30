@@ -3,7 +3,7 @@ require 'pareto/nondominated_population'
 module Pareto
   class FastNondominatedSorting
 
-    def initialize(comparator = PARETO_DOMINANCE_COMPARATOR)
+    def initialize(comparator = ParetoDominanceComparator)
       @comparator = comparator
     end
 
