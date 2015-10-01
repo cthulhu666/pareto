@@ -15,9 +15,9 @@ module Pareto
     end
 
     describe 'rank assignment' do
-      let(:s1) { Solution.new [0.0, 0.0] }
-      let(:s2) { Solution.new [0.5, 0.5] }
-      let(:s3) { Solution.new [1.0, 1.0] }
+      let(:s1) { Solution.new objectives: [0.0, 0.0] }
+      let(:s2) { Solution.new objectives: [0.5, 0.5] }
+      let(:s3) { Solution.new objectives: [1.0, 1.0] }
 
       it { expect(s1.rank).to eq 0 }
       it { expect(s2.rank).to eq 1 }
@@ -25,9 +25,9 @@ module Pareto
     end
 
     describe 'crowding assignment' do
-      let(:s1) { Solution.new [0.0, 1.0] }
-      let(:s2) { Solution.new [0.5, 0.5] }
-      let(:s3) { Solution.new [1.0, 0.0] }
+      let(:s1) { Solution.new objectives: [0.0, 1.0] }
+      let(:s2) { Solution.new objectives: [0.5, 0.5] }
+      let(:s3) { Solution.new objectives: [1.0, 0.0] }
 
       it { expect(s1.rank).to eq 0 }
       it { expect(s2.rank).to eq 0 }

@@ -2,9 +2,9 @@
 
 [![Build Status](https://travis-ci.org/cthulhu666/pareto.svg?branch=master)](https://travis-ci.org/cthulhu666/pareto)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/pareto`. To experiment with that code, run `bin/console` for an interactive prompt.
+This gem is my attempt to rewrite some parts of MOEA Framework (http://moeaframework.org/) in Ruby.
+I hope to learn something about evolutionary algorithms in the process.
 
-TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 

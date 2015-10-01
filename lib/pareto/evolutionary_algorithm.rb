@@ -1,9 +1,10 @@
-require 'pareto/algorithm'
-
 module Pareto
   class EvolutionaryAlgorithm < Algorithm
 
-    def initialize(problem:, population:, archive:, initialization:)
+    attr_reader :population
+
+    def initialize(problem:, population:, archive: nil, initialization: nil)
+      @population = population
       super(problem)
     end
 

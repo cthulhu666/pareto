@@ -5,10 +5,16 @@ require "pareto/fast_nondominated_sorting"
 require "pareto/nondominated_population"
 require "pareto/nondominated_sorting_population"
 require "pareto/tournament_selection"
+require "pareto/real_variable"
 
 require "pareto/algorithm"
 require "pareto/evolutionary_algorithm"
 require "pareto/algorithms/nsgaii"
+
+require "pareto/problems/viennet"
+
+require "pareto/operators/one_point_crossover"
+require "pareto/operators/simulated_binary_crossover"
 
 module Pareto
 
