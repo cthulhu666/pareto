@@ -41,5 +41,13 @@ module Pareto
       @data.sample
     end
 
+    def delete_if &block
+      @data.delete_if &block
+    end
+
+    def delete_at(i)
+      @data.delete_at(i)
+    end
+
   end
 end

@@ -10,6 +10,7 @@ require "pareto/real_variable"
 require "pareto/algorithm"
 require "pareto/evolutionary_algorithm"
 require "pareto/algorithms/nsgaii"
+require "pareto/algorithms/spea2"
 
 require "pareto/problems/viennet"
 
@@ -23,6 +24,8 @@ module Pareto
   RankComparator = -> (s1, s2) { s1.rank <=> s2.rank }
 
   CrowdingComparator = -> (s1, s2) { s2.crowding_distance <=> s1.crowding_distance }
+
+  FitnessComparator = -> (s1, s2) { s1.fitness <=> s2.fitness }
 
   NondominatedSortingComparator = Proc.new do |s1, s2|
     a = RankComparator.(s1, s2)

@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pareto/nondominated_population'
 
 module Pareto
   describe NondominatedPopulation do

@@ -1,12 +1,13 @@
 module Pareto
   class Solution
 
-    attr_accessor :objectives, :constraints, :rank, :crowding_distance, :variables
+    attr_accessor :objectives, :constraints, :rank, :crowding_distance, :variables, :fitness, :strength
 
-    def initialize(objectives: [], constraints: [], variables: [])
+    def initialize(objectives: [], constraints: [], variables: [], fitness: nil)
       @objectives = objectives
       @constraints = constraints
       @variables = variables
+      @fitness = fitness
     end
 
     def number_of_objectives

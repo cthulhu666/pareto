@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pareto/nondominated_sorting_population'
 
 module Pareto
 

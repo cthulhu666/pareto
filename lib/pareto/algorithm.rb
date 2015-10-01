@@ -6,6 +6,7 @@ module Pareto
     def initialize(problem)
       @number_of_evaluations = 0
       @problem = problem
+      @initialized = false
     end
 
     def evaluate_all(solutions)
@@ -18,9 +19,22 @@ module Pareto
     end
 
     def step
-      # TODO state machine?
-      iterate
+      unless initialized?
+        initialize_algorithm
+        @initialized = true
+      else
+        iterate
+      end
     end
+
+    def initialized?
+      @initialized
+    end
+
+    def initialize_algorithm
+      raise NotImplementedError
+    end
+    protected :initialize_algorithm
 
     def iterate
       raise NotImplementedError
