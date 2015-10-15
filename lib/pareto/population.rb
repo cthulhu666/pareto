@@ -49,5 +49,13 @@ module Pareto
       @data.delete_at(i)
     end
 
+    def clear
+      @data.clear
+    end
+
+    def shift
+      @data.shift
+    end
+
   end
 end

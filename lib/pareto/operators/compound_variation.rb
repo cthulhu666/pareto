@@ -10,7 +10,7 @@ module Pareto
         result = parents.dup
         @operators.each do |op|
           if op.arity == result.size
-            result = operator.eveolve(result)
+            result = op.evolve(result)
           elsif op.arity == 1
             result.size.times { |i| result[i] = op.evolve([result[i]]).first }
           else
@@ -18,6 +18,10 @@ module Pareto
           end
         end
         result
+      end
+
+      def arity
+        @operators.first.arity
       end
 
     end

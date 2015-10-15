@@ -35,7 +35,6 @@ module Pareto
 
           matrix.each_with_index do |row, i|
             point = row.first
-
             if point.last < minimum_distance
               minimum_distance = point.last
               minimum_index = i
@@ -63,7 +62,8 @@ module Pareto
               if point.first == index
                 true
               elsif point.first > index
-                point.first -= 1
+                point[0] -= 1
+                false
               end
             end
           end
@@ -123,13 +123,14 @@ module Pareto
 
       end
 
-      attr_reader :fitness_evaluator, :number_of_offspring, :selection
+      attr_reader :fitness_evaluator, :number_of_offspring, :selection, :variation
 
       def initialize(problem:, initialization:, variation:, number_of_offspring:, k:)
         @fitness_evaluator = StrengthFitnessEvaluator.new(k)
         @number_of_offspring = number_of_offspring
         @selection = TournamentSelection.new(comparator: Pareto::FitnessComparator)
-        # super
+        @variation = variation
+        super(problem: problem, initialization: initialization, population: Population.new)
       end
 
       def iterate
@@ -156,6 +157,7 @@ module Pareto
       end
 
       def initialize_algorithm
+        super()
         fitness_evaluator.evaluate(population)
       end
 
@@ -172,11 +174,12 @@ module Pareto
 
         if survivors.size < size
           # fill remaining spaces with dominated solutions
-          offspring.sort &Pareto.FitnessComparator
+          offspring.sort &Pareto::FitnessComparator
           survivors.add(offspring.shift) while survivors.size < size
         elsif survivors.size > size
           # some of the survivors must be truncated
-          map = MutableDistanceMap.new(SPEA2.compute_distance_matrix(survivors))
+          raw_distance_matrix = SPEA2.compute_distance_matrix(survivors)
+          map = MutableDistanceMap.new(raw_distance_matrix)
           while survivors.size > size
             index = map.find_most_crowded_point
             map.remove_point(index)

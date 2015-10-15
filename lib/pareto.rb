@@ -16,6 +16,7 @@ require "pareto/problems/viennet"
 
 require "pareto/operators/one_point_crossover"
 require "pareto/operators/simulated_binary_crossover"
+require "pareto/operators/compound_variation"
 
 module Pareto
 
