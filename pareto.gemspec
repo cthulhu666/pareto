@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Jakub Głuszecki"]
   spec.email         = ["jakub.gluszecki@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{Multiobjective optimization algorithms in Ruby}
+  spec.description   = %q{Attempt to rewrite some parts of MOEA Framework (http://moeaframework.org/) in Ruby.}
+  spec.homepage      = "https://github.com/cthulhu666/pareto"
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
   # delete this section to allow pushing this gem to any host.
