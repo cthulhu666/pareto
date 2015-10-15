@@ -1,6 +1,7 @@
 # Pareto
 
 [![Build Status](https://travis-ci.org/cthulhu666/pareto.svg?branch=master)](https://travis-ci.org/cthulhu666/pareto)
+[![Code Climate](https://codeclimate.com/github/cthulhu666/pareto/badges/gpa.svg)](https://codeclimate.com/github/cthulhu666/pareto)
 
 This gem is my attempt to rewrite some parts of MOEA Framework (http://moeaframework.org/) in Ruby.
 I hope to learn something about evolutionary algorithms in the process.
