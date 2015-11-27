@@ -11,7 +11,7 @@ module Pareto
       def evolve(parents)
         # TODO not really one point, fix it
         n = parents.first.number_of_variables
-        children = parents.map &:dup
+        children = parents.map(&:dup)
         if rand <= probability
           sum = children.map(&:variables).flatten.shuffle!
           children[0].variables = sum[0...n]

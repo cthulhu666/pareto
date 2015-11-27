@@ -25,24 +25,24 @@ module Pareto
     end
 
     def truncate(size, comparator)
-      @data.sort! &comparator
+      @data.sort!(&comparator)
       @data = @data[0...size]
     end
 
-    def each &block
-      @data.each &block
+    def each(&block)
+      @data.each(&block)
     end
 
-    def sort! &block
-      @data.sort! &block
+    def sort!(&block)
+      @data.sort!(&block)
     end
 
     def sample
       @data.sample
     end
 
-    def delete_if &block
-      @data.delete_if &block
+    def delete_if(&block)
+      @data.delete_if(&block)
     end
 
     def delete_at(i)
@@ -59,3 +59,4 @@ module Pareto
 
   end
 end
+

@@ -10,7 +10,7 @@ module Pareto
 
     def distance(s1, s2)
       distance = s1.number_of_objectives.times.inject(0.0) do |d, i|
-        d += (s1.objectives[i] - s2.objectives[i]) ** 2.0
+        d + (s1.objectives[i] - s2.objectives[i]) ** 2.0
       end
       distance ** 0.5
     end

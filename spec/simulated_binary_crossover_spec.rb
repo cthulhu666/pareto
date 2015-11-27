@@ -24,8 +24,8 @@ module Pareto
         let(:c2) { Solution.new(variables:[var(-2.0, R), var(2.0, R)]) }
 
         let :offspring do
-          1000.times.inject([]) do |arr, i|
-            arr += operator.evolve([s1, s2])
+          1000.times.inject([]) do |arr, _i|
+            arr + operator.evolve([s1, s2])
           end
         end
 

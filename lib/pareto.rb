@@ -86,7 +86,7 @@ module Pareto
   # TODO move to Solution class?
   def self.get_constraints(solution)
     solution.constraints.inject(0.0) do |s, c|
-      s += c.abs
+      s + c.abs
     end
   end
 

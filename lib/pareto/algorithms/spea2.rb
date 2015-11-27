@@ -174,7 +174,7 @@ module Pareto
 
         if survivors.size < size
           # fill remaining spaces with dominated solutions
-          offspring.sort &Pareto::FitnessComparator
+          offspring.sort(&Pareto::FitnessComparator)
           survivors.add(offspring.shift) while survivors.size < size
         elsif survivors.size > size
           # some of the survivors must be truncated
@@ -200,7 +200,7 @@ module Pareto
             # TODO distance is symmetrical, so no need to calculate it for s1,s2 and then for s2,s1
             s1, s2 = population[x], population[y]
             distance = s1.number_of_objectives.times.inject(0.0) do |d, i|
-              d += (s1.objectives[i] - s2.objectives[i]) ** 2.0
+              d + (s1.objectives[i] - s2.objectives[i]) ** 2.0
             end
             distance ** 0.5
           end

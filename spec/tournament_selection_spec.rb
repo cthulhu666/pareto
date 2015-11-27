@@ -18,7 +18,7 @@ module Pareto
       let(:pop) { Population.new([s1, s2, s3]) }
 
       let(:numbers) do
-        100.times.inject(Hash.new(0)) { |h, i| h[selection.select_one(pop)] +=1; h }
+        100.times.inject(Hash.new(0)) { |h, _i| h[selection.select_one(pop)] += 1; h }
       end
 
       it { expect(numbers[s1]).to be > numbers[s2] }

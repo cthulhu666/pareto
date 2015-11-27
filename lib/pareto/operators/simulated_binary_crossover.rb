@@ -13,7 +13,7 @@ module Pareto
 
       def evolve(parents)
         n = parents.first.number_of_variables
-        children = parents.map &:dup
+        children = parents.map(&:dup)
 
         if rand <= probability
           n.times do |i|
