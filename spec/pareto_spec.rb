@@ -80,9 +80,9 @@ describe Pareto do
 
   describe Pareto::CrowdingComparator do
     context 'dominance' do
-      let(:s1) { s = Pareto::Solution.new; s.crowding_distance = 1.0 / 0.0; s }
-      let(:s2) { s = Pareto::Solution.new; s.crowding_distance = 0.0; s }
-      let(:s3) { s = Pareto::Solution.new; s.crowding_distance = 1.0; s }
+      let(:s1) { Pareto::Solution.new(crowding_distance: 1.0 / 0.0) }
+      let(:s2) { Pareto::Solution.new(crowding_distance: 0.0) }
+      let(:s3) { Pareto::Solution.new(crowding_distance: 1.0) }
 
       it { expect(Pareto::CrowdingComparator.call(s1, s2)).to be < 0 }
       it { expect(Pareto::CrowdingComparator.call(s2, s1)).to be > 0 }
@@ -91,10 +91,10 @@ describe Pareto do
     end
 
     context 'nondominance' do
-      let(:s1) { s = Pareto::Solution.new; s.crowding_distance = 1.0 / 0.0; s }
-      let(:s2) { s = Pareto::Solution.new; s.crowding_distance = 1.0 / 0.0; s }
-      let(:s3) { s = Pareto::Solution.new; s.crowding_distance = 1.0; s }
-      let(:s4) { s = Pareto::Solution.new; s.crowding_distance = 1.0; s }
+      let(:s1) { Pareto::Solution.new(crowding_distance: 1.0 / 0.0) }
+      let(:s2) { Pareto::Solution.new(crowding_distance: 1.0 / 0.0) }
+      let(:s3) { Pareto::Solution.new(crowding_distance: 1.0) }
+      let(:s4) { Pareto::Solution.new(crowding_distance: 1.0) }
 
       it { expect(Pareto::CrowdingComparator.call(s1, s2)).to eq 0 }
       it { expect(Pareto::CrowdingComparator.call(s2, s1)).to eq 0 }
@@ -106,16 +106,16 @@ describe Pareto do
 
   describe Pareto::RankComparator do
     context 'dominance' do
-      let(:s1) { s = Pareto::Solution.new; s.rank = 0; s }
-      let(:s2) { s = Pareto::Solution.new; s.rank = 1; s }
+      let(:s1) { Pareto::Solution.new(rank: 0) }
+      let(:s2) { Pareto::Solution.new(rank: 1) }
 
       it { expect(Pareto::RankComparator.call(s1, s2)).to be < 0 }
       it { expect(Pareto::RankComparator.call(s2, s1)).to be > 0 }
     end
 
     context 'nondominance' do
-      let(:s1) { s = Pareto::Solution.new; s.rank = 0; s }
-      let(:s2) { s = Pareto::Solution.new; s.rank = 0; s }
+      let(:s1) { Pareto::Solution.new(rank: 0) }
+      let(:s2) { Pareto::Solution.new(rank: 0) }
 
       it { expect(Pareto::RankComparator.call(s1, s2)).to eq 0 }
       it { expect(Pareto::RankComparator.call(s2, s1)).to eq 0 }
@@ -124,10 +124,10 @@ describe Pareto do
 
   describe Pareto::NondominatedSortingComparator do
     context 'dominance' do
-      let(:s1) { s = Pareto::Solution.new; s.rank = 0; s }
-      let(:s2) { s = Pareto::Solution.new; s.rank = 1; s }
-      let(:s3) { s = Pareto::Solution.new; s.rank = 0; s.crowding_distance = 0; s }
-      let(:s4) { s = Pareto::Solution.new; s.rank = 0; s.crowding_distance = 1; s }
+      let(:s1) { Pareto::Solution.new(rank: 0) }
+      let(:s2) { Pareto::Solution.new(rank: 1) }
+      let(:s3) { Pareto::Solution.new(rank: 0, crowding_distance: 0) }
+      let(:s4) { Pareto::Solution.new(rank: 0, crowding_distance: 1) }
 
       it { expect(Pareto::NondominatedSortingComparator.call(s1, s2)).to be < 0 }
       it { expect(Pareto::NondominatedSortingComparator.call(s2, s1)).to be > 0 }
@@ -136,8 +136,8 @@ describe Pareto do
     end
 
     context 'nondominance' do
-      let(:s1) { s = Pareto::Solution.new; s.rank = 0; s }
-      let(:s2) { s = Pareto::Solution.new; s.rank = 0; s }
+      let(:s1) { Pareto::Solution.new(rank: 0) }
+      let(:s2) { Pareto::Solution.new(rank: 0) }
 
       it { expect(Pareto::NondominatedSortingComparator.call(s1, s2)).to eq 0 }
       it { expect(Pareto::NondominatedSortingComparator.call(s2, s1)).to eq 0 }
