@@ -121,4 +121,26 @@ describe Pareto do
       it { expect(Pareto::RankComparator.call(s2, s1)).to eq 0 }
     end
   end
+
+  describe Pareto::NondominatedSortingComparator do
+    context 'dominance' do
+      let(:s1) { s = Pareto::Solution.new; s.rank = 0; s }
+      let(:s2) { s = Pareto::Solution.new; s.rank = 1; s }
+      let(:s3) { s = Pareto::Solution.new; s.rank = 0; s.crowding_distance = 0; s }
+      let(:s4) { s = Pareto::Solution.new; s.rank = 0; s.crowding_distance = 1; s }
+
+      it { expect(Pareto::NondominatedSortingComparator.call(s1, s2)).to be < 0 }
+      it { expect(Pareto::NondominatedSortingComparator.call(s2, s1)).to be > 0 }
+      it { expect(Pareto::NondominatedSortingComparator.call(s3, s4)).to be > 0 }
+      it { expect(Pareto::NondominatedSortingComparator.call(s4, s3)).to be < 0 }
+    end
+
+    context 'nondominance' do
+      let(:s1) { s = Pareto::Solution.new; s.rank = 0; s }
+      let(:s2) { s = Pareto::Solution.new; s.rank = 0; s }
+
+      it { expect(Pareto::NondominatedSortingComparator.call(s1, s2)).to eq 0 }
+      it { expect(Pareto::NondominatedSortingComparator.call(s2, s1)).to eq 0 }
+    end
+  end
 end
