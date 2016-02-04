@@ -5,7 +5,7 @@ module Pareto
       attr_reader :selection, :variation
 
       def initialize(problem: , population:, archive: nil, initialization: nil, variation:, selection: TournamentSelection.new)
-        raise ArgumentError, population.class unless population.is_a?(NondominatedSortingPopulation)
+        fail ArgumentError, population.class unless population.is_a?(NondominatedSortingPopulation)
         @variation = variation
         @selection = selection
         super(problem: problem, population: population)

@@ -4,13 +4,13 @@ module Pareto
     attr_reader :value, :bounds
 
     def initialize(value: nil, bounds:)
-      raise ArgumentError, bounds unless bounds.is_a?(Range)
+      fail ArgumentError, bounds unless bounds.is_a?(Range)
       @bounds = bounds
       self.value = value if value
     end
 
     def value=(v)
-      raise ArgumentError, v unless bounds.include?(v)
+      fail ArgumentError, v unless bounds.include?(v)
       @value = v.to_f
     end
 
