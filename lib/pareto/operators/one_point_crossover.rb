@@ -1,7 +1,6 @@
 module Pareto
   module Operators
     class OnePointCrossover
-
       attr_reader :probability
 
       def initialize(probability: 0.90)
@@ -9,7 +8,7 @@ module Pareto
       end
 
       def evolve(parents)
-        # TODO not really one point, fix it
+        # TODO: not really one point, fix it
         n = parents.first.number_of_variables
         children = parents.map(&:dup)
         if rand <= probability
@@ -19,7 +18,6 @@ module Pareto
         end
         children
       end
-
     end
   end
 end

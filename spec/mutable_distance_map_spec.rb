@@ -2,22 +2,22 @@ require 'spec_helper'
 
 module Pareto
   module Algorithms
-
     describe SPEA2::MutableDistanceMap do
-
-
       context 'data set 1' do
-
-        let(:raw_distance_matrix) { [
+        let(:raw_distance_matrix) do
+          [
             [0, 1.0, 0.5**0.5],
             [1.0, 0, 0.5**0.5],
-            [0.5**0.5, 0.5**0.5, 0]] }
+            [0.5**0.5, 0.5**0.5, 0]]
+        end
 
-        let(:distance_matrix) { [
+        let(:distance_matrix) do
+          [
             [[2, 0.7071067811865476], [1, 1.0]],
             [[2, 0.7071067811865476], [0, 1.0]],
             [[0, 0.7071067811865476], [1, 0.7071067811865476]]
-        ] }
+          ]
+        end
 
         let(:map) { SPEA2::MutableDistanceMap.new(raw_distance_matrix) }
 
@@ -28,22 +28,23 @@ module Pareto
         describe '#remove_point' do
           pending
         end
-
       end
 
-
       context 'data set 2' do
-
-        let(:raw_distance_matrix) { [
+        let(:raw_distance_matrix) do
+          [
             [0.0, 1.4142135623730951, 0.7071067811865476],
             [1.4142135623730951, 0.0, 0.7071067811865476],
-            [0.7071067811865476, 0.7071067811865476, 0.0]] }
+            [0.7071067811865476, 0.7071067811865476, 0.0]]
+        end
 
-        let(:distance_matrix) { [
+        let(:distance_matrix) do
+          [
             [[2, 0.7071067811865476], [1, 1.4142135623730951]],
             [[2, 0.7071067811865476], [0, 1.4142135623730951]],
             [[0, 0.7071067811865476], [1, 0.7071067811865476]]
-        ] }
+          ]
+        end
 
         let(:map) { SPEA2::MutableDistanceMap.new(raw_distance_matrix) }
 
@@ -56,15 +57,12 @@ module Pareto
         end
 
         describe '#remove_point' do
-          it {
+          it do
             map.remove_point(2)
             expect(map.matrix).to eq [[[1, 1.4142135623730951]], [[0, 1.4142135623730951]]]
-          }
+          end
         end
-
       end
-
     end
-
   end
 end

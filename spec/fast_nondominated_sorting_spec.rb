@@ -2,7 +2,6 @@ require 'spec_helper'
 
 module Pareto
   describe FastNondominatedSorting do
-
     let(:pop) { Population.new }
 
     let(:sorting) { FastNondominatedSorting.new }
@@ -33,9 +32,7 @@ module Pareto
       it { expect(s2.rank).to eq 0 }
       it { expect(s3.rank).to eq 0 }
 
-      it { expect(s1.crowding_distance).to eq 1.0/0.0 }
-
+      it { expect(s1.crowding_distance).to eq 1.0 / 0.0 }
     end
-
   end
 end

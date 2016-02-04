@@ -1,6 +1,5 @@
 module Pareto
   class Algorithm
-
     attr_reader :number_of_evaluations, :problem
 
     def initialize(problem)
@@ -32,15 +31,13 @@ module Pareto
     end
 
     def initialize_algorithm
-      raise NotImplementedError
+      fail NotImplementedError
     end
     protected :initialize_algorithm
 
     def iterate
-      raise NotImplementedError
+      fail NotImplementedError
     end
     protected :iterate
-
-
   end
 end

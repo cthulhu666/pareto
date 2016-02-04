@@ -2,7 +2,6 @@ require 'spec_helper'
 
 module Pareto
   describe TournamentSelection do
-
     let(:selection) { TournamentSelection.new }
 
     before(:each) do
@@ -10,7 +9,6 @@ module Pareto
     end
 
     describe '#select' do
-
       let(:s1) { Solution.new(objectives: [1]) }
       let(:s2) { Solution.new(objectives: [2]) }
       let(:s3) { Solution.new(objectives: [3]) }
@@ -23,8 +21,6 @@ module Pareto
 
       it { expect(numbers[s1]).to be > numbers[s2] }
       it { expect(numbers[s2]).to be > numbers[s3] }
-
     end
-
   end
 end

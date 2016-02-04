@@ -1,7 +1,6 @@
 module Pareto
   module Operators
     class CompoundVariation
-
       def initialize(*operators)
         @operators = [operators].flatten
       end
@@ -14,7 +13,7 @@ module Pareto
           elsif op.arity == 1
             result.size.times { |i| result[i] = op.evolve([result[i]]).first }
           else
-            raise "Invalid number of parents"
+            fail 'Invalid number of parents'
           end
         end
         result
@@ -23,7 +22,6 @@ module Pareto
       def arity
         @operators.first.arity
       end
-
     end
   end
 end

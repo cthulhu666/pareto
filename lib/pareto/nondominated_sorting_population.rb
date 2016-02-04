@@ -1,6 +1,5 @@
 module Pareto
   class NondominatedSortingPopulation < Population
-
     attr_reader :fast_nondominated_sorting
 
     def initialize
@@ -26,6 +25,5 @@ module Pareto
     def modified?
       @modified
     end
-
   end
 end

@@ -1,26 +1,25 @@
-require "pareto/version"
-require "pareto/solution"
-require "pareto/population"
-require "pareto/fast_nondominated_sorting"
-require "pareto/nondominated_population"
-require "pareto/nondominated_sorting_population"
-require "pareto/tournament_selection"
-require "pareto/real_variable"
+require 'pareto/version'
+require 'pareto/solution'
+require 'pareto/population'
+require 'pareto/fast_nondominated_sorting'
+require 'pareto/nondominated_population'
+require 'pareto/nondominated_sorting_population'
+require 'pareto/tournament_selection'
+require 'pareto/real_variable'
 
-require "pareto/algorithm"
-require "pareto/evolutionary_algorithm"
-require "pareto/algorithms/nsgaii"
-require "pareto/algorithms/spea2"
+require 'pareto/algorithm'
+require 'pareto/evolutionary_algorithm'
+require 'pareto/algorithms/nsgaii'
+require 'pareto/algorithms/spea2'
 
-require "pareto/problems/viennet"
+require 'pareto/problems/viennet'
 
-require "pareto/operators/one_point_crossover"
-require "pareto/operators/simulated_binary_crossover"
-require "pareto/operators/compound_variation"
+require 'pareto/operators/one_point_crossover'
+require 'pareto/operators/simulated_binary_crossover'
+require 'pareto/operators/compound_variation'
 
 module Pareto
-
-  EPS = 1e-10 # TODO check this thingy
+  EPS = 1e-10 # TODO: check this thingy
 
   RankComparator = -> (s1, s2) { s1.rank <=> s2.rank }
 
@@ -28,23 +27,23 @@ module Pareto
 
   FitnessComparator = -> (s1, s2) { s1.fitness <=> s2.fitness }
 
-  NondominatedSortingComparator = Proc.new do |s1, s2|
-    a = RankComparator.(s1, s2)
+  NondominatedSortingComparator = proc do |s1, s2|
+    a = RankComparator.call(s1, s2)
     unless a == 0
       a
     else
-      CrowdingComparator.(s1, s2)
+      CrowdingComparator.call(s1, s2)
     end
   end
 
-  AggregateConstraintComparator = Proc.new do |s1, s2|
+  AggregateConstraintComparator = proc do |s1, s2|
     constraints1 = get_constraints(s1)
     constraints2 = get_constraints(s2)
 
-    if ((constraints1 != 0.0) || (constraints2 != 0.0))
-      if (constraints1 == 0.0)
+    if (constraints1 != 0.0) || (constraints2 != 0.0)
+      if constraints1 == 0.0
         -1
-      elsif (constraints2 == 0.0)
+      elsif constraints2 == 0.0
         1
       else
         constraints1 <=> constraints2
@@ -54,7 +53,7 @@ module Pareto
     end
   end
 
-  ParetoObjectiveComparator = Proc.new do |s1, s2|
+  ParetoObjectiveComparator = proc do |s1, s2|
     dominate1 = false
     dominate2 = false
 
@@ -71,23 +70,21 @@ module Pareto
     next 0 if dominate1 == dominate2
     next -1 if dominate1
     next 1
-
   end
 
-  ParetoDominanceComparator = Proc.new do |s1, s2|
-    a = AggregateConstraintComparator.(s1, s2)
+  ParetoDominanceComparator = proc do |s1, s2|
+    a = AggregateConstraintComparator.call(s1, s2)
     unless a == 0
       a
     else
-      ParetoObjectiveComparator.(s1, s2)
+      ParetoObjectiveComparator.call(s1, s2)
     end
   end
 
-  # TODO move to Solution class?
+  # TODO: move to Solution class?
   def self.get_constraints(solution)
     solution.constraints.inject(0.0) do |s, c|
       s + c.abs
     end
   end
-
 end

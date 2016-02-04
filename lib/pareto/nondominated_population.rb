@@ -1,6 +1,5 @@
 module Pareto
   class NondominatedPopulation < Population
-
     attr_reader :comparator
 
     def initialize(comparator = ParetoDominanceComparator)
@@ -10,14 +9,14 @@ module Pareto
 
     def distance(s1, s2)
       distance = s1.number_of_objectives.times.inject(0.0) do |d, i|
-        d + (s1.objectives[i] - s2.objectives[i]) ** 2.0
+        d + (s1.objectives[i] - s2.objectives[i])**2.0
       end
-      distance ** 0.5
+      distance**0.5
     end
 
     def add(solution)
       @data.delete_if do |s|
-        flag = comparator.(solution, s)
+        flag = comparator.call(solution, s)
         if flag < 0
           true
         elsif flag > 0
@@ -29,6 +28,5 @@ module Pareto
 
       super(solution)
     end
-
   end
 end

@@ -1,9 +1,7 @@
 module Pareto
   module Operators
-
     # http://www.slideshare.net/paskorn/self-adaptive-simulated-binary-crossover-presentation
     class SimulatedBinaryCrossover
-
       attr_reader :probability
 
       def initialize(probability: 0.90, distribution_index: 2.0)
@@ -24,9 +22,9 @@ module Pareto
         children
       end
 
-
       def evolve_variables(v1, v2, distribution_index)
-        x0, x1 = v1.value, v2.value
+        x0 = v1.value
+        x1 = v2.value
         dx = (x1 - x0).abs
 
         if dx > Pareto::EPS
@@ -51,8 +49,8 @@ module Pareto
             bl = bu
           end
 
-          p_bl = 1 - 1 / (2 * (bl ** (distribution_index + 1)))
-          p_bu = 1 - 1 / (2 * (bu ** (distribution_index + 1)))
+          p_bl = 1 - 1 / (2 * (bl**(distribution_index + 1)))
+          p_bu = 1 - 1 / (2 * (bu**(distribution_index + 1)))
 
           u = rand
 
@@ -64,16 +62,16 @@ module Pareto
           b0 = nil
           b1 = nil
 
-          if u0 <= 0.5
-            b0 = (2 * u0) ** (1 / (distribution_index + 1))
-          else
-            b0 = (0.5 / (1 - u0)) ** (1 / (distribution_index + 1))
+          b0 = if u0 <= 0.5
+                 (2 * u0)**(1 / (distribution_index + 1))
+               else
+                 (0.5 / (1 - u0))**(1 / (distribution_index + 1))
           end
 
-          if u1 <= 0.5
-            b1 = (2 * u1) ** (1 / (distribution_index + 1))
-          else
-            b1 = (0.5 / (1 - u1)) ** (1 / (distribution_index + 1))
+          b1 = if u1 <= 0.5
+                 (2 * u1)**(1 / (distribution_index + 1))
+               else
+                 (0.5 / (1 - u1))**(1 / (distribution_index + 1))
           end
 
           if x0 < x1
@@ -83,7 +81,6 @@ module Pareto
             v1.value = (0.5 * (x0 + x1 + b1 * (x0 - x1)))
             v2.value = (0.5 * (x0 + x1 + b0 * (x1 - x0)))
           end
-
 
           if rand > 0.5
             temp = v1.value
@@ -103,7 +100,6 @@ module Pareto
             v2.value = ub
           end
         end
-
       end
 
       protected :evolve_variables

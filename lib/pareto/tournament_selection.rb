@@ -1,10 +1,9 @@
 module Pareto
   class TournamentSelection
-
     attr_reader :size, :comparator
 
-    #TODO change comparator
-    #TournamentSelection selection = new TournamentSelection(2,
+    # TODO: change comparator
+    # TournamentSelection selection = new TournamentSelection(2,
     #                                                        new ChainedComparator(
     #                                                                new ParetoDominanceComparator(),
     #                                                                    new CrowdingComparator()));
@@ -14,7 +13,7 @@ module Pareto
       @comparator = comparator
     end
 
-    # TODO arity as named param with default 2
+    # TODO: arity as named param with default 2
     def select(arity, population)
       arity.times.map { select_one(population) }
     end
@@ -23,15 +22,11 @@ module Pareto
       winner = population.sample
       (1...size).each do
         candidate = population.sample
-        if comparator.(winner, candidate) > 0
-          winner = candidate
-        end
+        winner = candidate if comparator.call(winner, candidate) > 0
       end
 
       winner
     end
     protected :select_one
-
-
   end
 end

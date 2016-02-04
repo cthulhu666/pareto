@@ -2,7 +2,7 @@ module Pareto
   class Population
     include Enumerable
 
-    def initialize(solutions = Array.new)
+    def initialize(solutions = [])
       @data = solutions
     end
 
@@ -56,7 +56,5 @@ module Pareto
     def shift
       @data.shift
     end
-
   end
 end
-

@@ -2,7 +2,6 @@ require 'pareto/nondominated_population'
 
 module Pareto
   class FastNondominatedSorting
-
     def initialize(comparator = ParetoDominanceComparator)
       @comparator = comparator
     end
@@ -24,13 +23,12 @@ module Pareto
 
         rank += 1
       end
-
     end
 
     def update_crowding_distance(front)
       n = front.size
       if n < 3
-        front.each { |s| s.crowding_distance = 1.0/0.0 }
+        front.each { |s| s.crowding_distance = 1.0 / 0.0 }
       else
         front.each { |s| s.crowding_distance = 0.0 }
 
@@ -38,20 +36,18 @@ module Pareto
           front.sort! { |a, b| a.objectives[i] <=> b.objectives[i] }
 
           min_objective = front[0].objectives[i]
-          max_objective = front[n-1].objectives[i]
+          max_objective = front[n - 1].objectives[i]
 
           front[0].crowding_distance = 1.0 / 0.0
-				  front[n-1].crowding_distance = 1.0 / 0.0
+          front[n - 1].crowding_distance = 1.0 / 0.0
 
-          (1...n-1).each do |j|
+          (1...n - 1).each do |j|
             distance = front[j].crowding_distance
             distance += (front[j + 1].objectives[i] - front[j - 1].objectives[i])	/ (max_objective - min_objective)
             front[j].crowding_distance = distance
           end
-
         end
       end
     end
-
   end
 end

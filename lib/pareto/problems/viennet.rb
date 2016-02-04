@@ -1,7 +1,6 @@
 module Pareto
   module Problems
     class Viennet
-
       def evaluate(solution)
         x, y = *solution.variables.map(&:value)
 
@@ -15,11 +14,10 @@ module Pareto
       def new_solution
         bounds = -2.0..2.0
         Solution.new(variables: [
-                         RealVariable.new(value: rand(bounds), bounds: bounds),
-                         RealVariable.new(value: rand(bounds), bounds: bounds)
+                       RealVariable.new(value: rand(bounds), bounds: bounds),
+                       RealVariable.new(value: rand(bounds), bounds: bounds)
                      ])
       end
-
     end
   end
 end

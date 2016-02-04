@@ -1,6 +1,5 @@
 module Pareto
   class Solution
-
     attr_accessor :objectives, :constraints, :rank, :crowding_distance, :variables, :fitness, :strength
 
     def initialize(objectives: [], constraints: [], variables: [], fitness: nil)
@@ -24,6 +23,5 @@ module Pareto
       @constraints = @constraints.dup
       @variables = @variables.dup
     end
-
   end
 end

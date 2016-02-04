@@ -2,11 +2,9 @@ require 'spec_helper'
 
 module Pareto
   describe NondominatedPopulation do
-
     let(:pop) { NondominatedPopulation.new }
 
     describe '#distance' do
-
       let(:s1) { Solution.new(objectives: [0.0, 1.0, 0.0]) }
       let(:s2) { Solution.new(objectives: [0.0, 0.0, -1.0]) }
 
@@ -28,8 +26,6 @@ module Pareto
       it { expect(pop.size).to eq 1 }
       it { expect(pop).to include s1 }
       it { expect(pop).to_not include s2 }
-
     end
-
   end
 end
