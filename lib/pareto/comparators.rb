@@ -46,11 +46,7 @@ module Pareto
 
     ParetoDominanceComparator = proc do |s1, s2|
       a = AggregateConstraintComparator.call(s1, s2)
-      unless a == 0
-        a
-      else
-        ParetoObjectiveComparator.call(s1, s2)
-      end
+      a == 0 ? ParetoObjectiveComparator.call(s1, s2) : a
     end
   end
 end
