@@ -6,14 +6,7 @@ module Pareto
 
     FitnessComparator = -> (s1, s2) { s1.fitness <=> s2.fitness }
 
-    NondominatedSortingComparator = proc do |s1, s2|
-      a = RankComparator.call(s1, s2)
-      unless a == 0
-        a
-      else
-        CrowdingComparator.call(s1, s2)
-      end
-    end
+    NondominatedSortingComparator = -> (s1, s2) { [s1.rank, s2.crowding_distance] <=> [s2.rank, s1.crowding_distance] }
 
     AggregateConstraintComparator = proc do |s1, s2|
       constraints1 = Pareto.get_constraints(s1)
