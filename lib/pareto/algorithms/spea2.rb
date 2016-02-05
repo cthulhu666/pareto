@@ -76,7 +76,7 @@ module Pareto
 
         def initialize(k)
           @k = k
-          @comparator = Pareto::ParetoDominanceComparator
+          @comparator = Comparators::ParetoDominanceComparator
         end
 
         def evaluate(population)
@@ -128,7 +128,7 @@ module Pareto
       def initialize(problem:, initialization:, variation:, number_of_offspring:, k:)
         @fitness_evaluator = StrengthFitnessEvaluator.new(k)
         @number_of_offspring = number_of_offspring
-        @selection = TournamentSelection.new(comparator: Pareto::FitnessComparator)
+        @selection = TournamentSelection.new(comparator: Comparators::FitnessComparator)
         @variation = variation
         super(problem: problem, initialization: initialization, population: Population.new)
       end
@@ -174,7 +174,7 @@ module Pareto
 
         if survivors.size < size
           # fill remaining spaces with dominated solutions
-          offspring.sort(&Pareto::FitnessComparator)
+          offspring.sort(&Comparators::FitnessComparator)
           survivors.add(offspring.shift) while survivors.size < size
         elsif survivors.size > size
           # some of the survivors must be truncated
